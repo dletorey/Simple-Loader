@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Simple Loader by Dave Letorey</title>
+		<style type="text/css">
+			/* Center the loader */
+			#loader, #popup-loader{
+			  position: absolute;
+			  left: 50%;
+			  top: 50%;
+			  z-index: 100;
+			  width: 150px;
+			  height: 150px;
+			  margin: -75px 0 0 -75px;
+			  border: 16px solid #f3f3f3;
+			  border-radius: 50%;
+			  border-top: 16px solid #28a0c7;
+			  border-right: 16px solid #ffcb31;
+			  border-bottom: 16px solid #f05a3f;
+			  border-left: 16px solid #00a481;
+			  width: 120px;
+			  height: 120px;
+			  -webkit-animation: spin 2s linear infinite;
+			  animation: spin 2s linear infinite;
+			}
+
+			#popup-loader {
+			    z-index:5000;
+			}
+
+			.loader-container {
+			    width: 50%;
+			    height: 50%;
+			    margin: auto;
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    bottom: 0;
+			    right: 0;
+			}
+
+			@-webkit-keyframes spin {
+			  0% { -webkit-transform: rotate(0deg); }
+			  100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes spin {
+			  0% { transform: rotate(0deg); }
+			  100% { transform: rotate(360deg); }
+			}
+
+			/* Add animation to "page content" */
+			.animate-bottom {
+			  position: relative;
+			  -webkit-animation-name: animatebottom;
+			  -webkit-animation-duration: 1s;
+			  animation-name: animatebottom;
+			  animation-duration: 1s
+			}
+
+			@-webkit-keyframes animatebottom {
+			  from { bottom:-100px; opacity:0 } 
+			  to { bottom:0px; opacity:1 }
+			}
+
+			@keyframes animatebottom { 
+			  from{ bottom:-100px; opacity:0 } 
+			  to{ bottom:0; opacity:1 }
+			}
+
+			#loading {
+			  opacity: 0.1;
+			}
+
+			.hidden {
+			    display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="loader-container">
+		    <div id="loader"></div>
+		</div>
+		<main id="loading">
+			<h1>Simple Loader</h1>
+			<p>This is where the content goes</p>
+			<button onclick="addLoader();">Loader</button>
+		</main>
+		<script>
+			// removeLoader fires once page is loaded
+			function removeLoader() {
+				document.getElementsByTagName("main")[0].removeAttribute("id"); // sets <main id="loading"> to be <main> 
+				document.getElementById("loader").setAttribute("class", "hidden"); // sets <div id="loader"></div> to be <div id="loader" class="hidden"></div> so the loader displays
+			}
+			// addLoader fires once an action takes place
+			function addLoader() {
+				document.getElementsByTagName("main")[0].setAttribute("id", "loading"); // sets <main> to be <main id="loading">
+				document.getElementById("loader").removeAttribute("class"); // sets <div id="loader" class="hidden"></div> to be <div id="loader"></div> so the loader displays
+			}
+			// window.onload = function() {
+				// removeLoader();
+			// };
+			setTimeout(function(){ removeLoader(); }, 1000);
+		</script>
+	</body>
+</html>
